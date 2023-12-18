@@ -1,6 +1,6 @@
 // Write your code here
 
-// CLASS SYNTAX
+// CLASS SYNTAX (ES6)
 
 // class Movie {
 //   constructor (title, director, genre, releaseYear, rating) {
