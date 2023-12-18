@@ -11,8 +11,11 @@
 <body>
   <!-- To run this file right click the file in the navigation bar and select "Open with live server. Then open the developer tools in the browser and head to the console window."-->
 
-  <!-- Use this element to render your menu -->
-  <ul id="menu"></ul>
+  <ul id="menu">
+  </ul>
+
+  <ul id="menuCard">
+  </ul>
 
   <script>
     const menu = [
@@ -34,6 +37,61 @@
       }
     ]
     // Write your code here
+
+    const vegetarianMenu = menu.filter(items => items.isVegetarian === true);
+    let menuList = document.querySelector("#menu");
+
+    let menuTitle = document.createElement('h2'); 
+    menuList.appendChild(menuTitle); 
+    menuTitle.innerHTML = `Benicio's Trattoria`
+    // GA-LOBAL SCOPE 🤌
+
+    vegetarianMenu.map(x => { let menuListItem = document.createElement('li'); menuList.appendChild(menuListItem); menuListItem.innerHTML = `${x.name}`})
+    
+    
+    // const vegetarianMenu = menu.filter(items => items.isVegetarian === true);
+    // let menuList = document.querySelector("#menu");
+
+    // let menuTitle = document.createElement('h2'); 
+    menuList.appendChild(menuTitle); 
+    menuTitle.innerHTML = `Benicio's Trattoria`
+    // GA-LOoOoOBAL SCOPE 🤌 pollution
+
+    vegetarianMenu.map(x => { let menuListItem = document.createElement('li'); menuList.appendChild(menuListItem); menuListItem.innerHTML = `${x.name}`})
+    
+
+  // REFACTOR THIS TO USE ONE REUSEABLE FUNCTION - DUH! DRY & DEPENDENCY INVERSION PRINCIPLE. I THINK.
+  // Make it so that you can apply this to any section of the page.
+  // Make it so that you can use any menu.
+  // Challenge accepted? lol GO!
+
+  function vegetarianMenuGenerator(fullMenu, listId, restaurantName) {
+    const vegetarianMenu = fullMenu.filter(items => items.isVegetarian !== true);
+    //we have to check to see if all menus are using the same field names.
+    //in good code, you want all things that are being repeated to have a function like a constructor function or a function like this one. Hmm...
+    let menuList = document.querySelector(`#${listId}`);
+
+    let menuTitle = document.createElement('h1');
+    menuList.appendChild(menuTitle);
+    menuTitle.innerHTML = `${restaurantName}`
+    //NO GLOBAL SCOPE 😎 EEEEY
+    vegetarianMenu.map(x => { let menuListItem = document.createElement('li'); menuList.appendChild(menuListItem); menuListItem.innerHTML = `${x.name}` })
+  }
+
+  vegetarianMenuGenerator(menu, 'menuCard', "Antonio's Ristorante");
+  //What I don't understand - why is this coming above Benicio?
+  // BECAUSE YOU PUT THE SECOND UL INSIDE THE FIRST 👌
+  //Why is the styling different?
+   // BECAUSE YOU PUT THE SECOND UL INSIDE THE FIRST 👍
+
+  vegetarianMenuGenerator(menu, 'menuCard', "Bambino's Ristorante");
+  //Why is this creating a new <ul>
+  // They all do. That, I still don't know how.
+
+
+
+
+
 
   </script>
 </body>
